@@ -1,4 +1,4 @@
-package com.rentalcar.server.util;
+package com.rentalcar.server.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,7 +42,7 @@ public class SwaggerConfig {
     static {
         DEFAULT_API_INFO = new ApiInfo(
                 "Rental Car API ",
-                "Rental Car RESTfSSul Api Documentation",
+                "Rental Car RESTful Api Documentation",
                 "1.0", "urn:tos",
                 DEFAULT_CONTACT, "Apache 2.0",
                 "http://www.apache.org/licenses/LICENSE-2.0",
