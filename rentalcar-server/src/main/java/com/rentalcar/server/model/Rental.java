@@ -4,10 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import java.util.Date;
 
 /**
+ * DAO Rental Entity
+ *
  * @author faber
  */
 @ApiModel(description = "Entity Rental. Information on rented cars")
@@ -22,8 +23,8 @@ public class Rental {
     private Date startDate;
     private Date endDate;
 
-   @ManyToOne(fetch = FetchType.LAZY)
-   @JoinColumn(name = "car_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "car_id")
 //   @JsonIgnore
     private Car car;
 

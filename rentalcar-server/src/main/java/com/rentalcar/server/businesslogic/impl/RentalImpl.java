@@ -6,6 +6,7 @@ import com.rentalcar.server.exception.LocationNotFoundException;
 import com.rentalcar.server.exception.UserNotFoundException;
 import com.rentalcar.server.model.Car;
 import com.rentalcar.server.model.Location;
+import com.rentalcar.server.model.Rental;
 import com.rentalcar.server.model.User;
 import com.rentalcar.server.repository.CarRepository;
 import com.rentalcar.server.repository.LocationRepository;
@@ -22,7 +23,7 @@ import java.util.Optional;
  * @author faber
  */
 @Component
-public class Rental implements RentalService {
+public class RentalImpl implements RentalService {
 
     @Autowired
     RentalRepository rentalRepository;
@@ -34,17 +35,19 @@ public class Rental implements RentalService {
     LocationRepository locationRepository;
 
     /**
-     * Rent car Service
+     * This method rents a car
      * @param userId
      * @param carId
      * @param pickUpLocationId
      * @param dropOffLocationId
+     * @param startDateInString
+     * @param endDateInString
      * @return
      * @throws ParseException
      */
 
     @Override
-    public com.rentalcar.server.model.Rental rentCar(Integer userId, Integer carId, Integer pickUpLocationId, Integer dropOffLocationId) throws ParseException {
+    public Rental rentCar(Integer userId, Integer carId, Integer pickUpLocationId, Integer dropOffLocationId, String startDateInString, String endDateInString) throws ParseException {
 
         Optional<User> user = userRepository.findById(userId);
         Optional<Car> car = carRepository.findById(carId);
@@ -71,8 +74,8 @@ public class Rental implements RentalService {
         rental.setCar(car.get());
         rental.setPickUpLocation(pickUpLocation.get());
         rental.setDropOffLocation(dropOffLocation.get());
-        rental.setStartDate(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2018-10-22 10:00"));
-        rental.setEndDate(new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2018-10-22 18:00"));
+        rental.setStartDate(new SimpleDateFormat("dd-M-yyyy hh:mm:ss a").parse(startDateInString));
+        rental.setEndDate(new SimpleDateFormat("dd-M-yyyy hh:mm:ss a").parse(endDateInString));
         rental.setUser(user.get());
         rental.setDescription("");
         rental = rentalRepository.save(rental);

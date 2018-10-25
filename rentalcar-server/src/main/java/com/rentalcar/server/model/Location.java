@@ -7,6 +7,8 @@ import javax.persistence.*;
 import java.util.Set;
 
 /**
+ * DAO Location Entity
+ *
  * @author faber
  */
 

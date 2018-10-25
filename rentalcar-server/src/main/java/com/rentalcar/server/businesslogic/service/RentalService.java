@@ -11,5 +11,5 @@ import java.text.ParseException;
 @Service
 public interface RentalService {
 
-    Rental rentCar(Integer userId, Integer carId, Integer pickUpLocationId, Integer dropOffLocationId) throws ParseException;
+    Rental rentCar(Integer userId, Integer carId, Integer pickUpLocationId, Integer dropOffLocationId, String startDateInString, String endDateInString) throws ParseException;
 }

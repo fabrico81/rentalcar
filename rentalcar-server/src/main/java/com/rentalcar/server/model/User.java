@@ -13,6 +13,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * DAO User Entity
+ *
  * @author faber
  */
 

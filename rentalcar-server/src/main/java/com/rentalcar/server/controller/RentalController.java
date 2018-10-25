@@ -36,7 +36,6 @@ public class RentalController {
     private RentalService rentalService;
 
 
-
     @ApiOperation(value = "Finds All rental ",
             notes = "",
             response = Rental.class,
@@ -80,14 +79,17 @@ public class RentalController {
 
     @ApiOperation(value = "Delete Rental ",response = Rental.class, responseContainer = "Object")
     @DeleteMapping("/rental/{id}")
-    public void deleteRental(@PathVariable int id){
+    public void deleteRental(@PathVariable int id)
+    {
         rentalRepository.deleteById(id);
     }
 
-    @PostMapping("/rent_car/{userId}/{carId}/{pickUpLocationId}/{dropOffLocationId}")
-    public ResponseEntity<Rental> rentCar(@PathVariable Integer userId, @PathVariable Integer carId, @PathVariable Integer pickUpLocationId,
-                                          @PathVariable Integer dropOffLocationId) throws ParseException {
-        return new ResponseEntity<Rental>( rentalService.rentCar(userId, carId, pickUpLocationId, dropOffLocationId), HttpStatus.OK);
+    @PostMapping("/rent_car/{userId}/{carId}/{pickUpLocationId}/{dropOffLocationId}/{startDate}/{endDate}")
+    public ResponseEntity<Rental> rentCar(@PathVariable Integer userId, @PathVariable Integer carId,
+                                          @PathVariable Integer pickUpLocationId, @PathVariable Integer dropOffLocationId,
+                                          @PathVariable String startDate, @PathVariable String endDate) throws ParseException {
+
+        return new ResponseEntity<Rental>( rentalService.rentCar(userId, carId, pickUpLocationId, dropOffLocationId, startDate, endDate), HttpStatus.OK);
 
 
     }

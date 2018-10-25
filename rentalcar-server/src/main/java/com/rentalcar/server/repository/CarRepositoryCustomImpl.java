@@ -1,7 +1,6 @@
-package com.rentalcar.server.repository.custom.impl;
+package com.rentalcar.server.repository;
 
 import com.rentalcar.server.model.Car;
-import com.rentalcar.server.repository.custom.service.CarRepositoryCustom;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,10 +12,12 @@ import java.util.List;
  * @author faber
  */
 
-public class CarRepositoryCustom implements com.rentalcar.server.repository.custom.service.CarRepositoryCustom {
+public class CarRepositoryCustomImpl implements CarRepositoryCustom {
 
     @PersistenceContext
     private EntityManager em;
+
+
 
     @Override
     public List<Car> checkCarAvailable(Integer pickUpLocationId, Integer dropOffLocationId, Date startDate, Date endDate) {

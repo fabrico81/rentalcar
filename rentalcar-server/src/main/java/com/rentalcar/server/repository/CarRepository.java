@@ -1,10 +1,11 @@
 package com.rentalcar.server.repository;
 
 import com.rentalcar.server.model.Car;
-import com.rentalcar.server.repository.custom.service.CarRepositoryCustom;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
+ *  CarRepository
+ *
  * @author faber
  */
 

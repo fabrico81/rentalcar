@@ -9,6 +9,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ *  DAO Car Entity
+ *
  * @author faber
  */
 @ApiModel(description="Entity Car. ")

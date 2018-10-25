@@ -6,6 +6,7 @@ import com.rentalcar.server.repository.CarRepository;
 import com.rentalcar.server.businesslogic.service.CarService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceEditor;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpStatus;
@@ -34,12 +35,13 @@ public class CarController {
     @Autowired
     private CarService carService;
 
+
     @GetMapping(path = "/cars")
     @ApiOperation(value = "Finds All car ",
             notes = "",
             response = Car.class,
             responseContainer = "List")
-    public List<Car> getCars(){
+    public List<Car> getCars() {
 
         return carRepository.findAll();
     }
@@ -49,10 +51,10 @@ public class CarController {
             notes = "",
             response = Car.class,
             responseContainer = "Car Resouce")
-    public Resource<Car> getCarById(@PathVariable Integer id){
+    public Resource<Car> getCarById(@PathVariable Integer id) {
         Optional<Car> car = carRepository.findById(id);
-        if(!car.isPresent())
-            throw new CarNotFoundException("id-" +id);
+        if (!car.isPresent())
+            throw new CarNotFoundException("id-" + id);
 
         Resource<Car> resource = new Resource<Car>(car.get());
         ControllerLinkBuilder linkTo =
@@ -63,7 +65,7 @@ public class CarController {
 
     @PostMapping("/car")
     @ApiOperation(value = "Add car ", response = Car.class, responseContainer = "Car")
-    public ResponseEntity<Car> addCar(@Valid @RequestBody Car car){
+    public ResponseEntity<Car> addCar(@Valid @RequestBody Car car) {
 
         Car savedCar = carRepository.save(car);
         URI location = ServletUriComponentsBuilder
@@ -75,7 +77,7 @@ public class CarController {
 
     @DeleteMapping("/car/{id}")
     @ApiOperation(value = "Delete car by id ", response = Car.class)
-    public void deleteCar(@PathVariable int id){
+    public void deleteCar(@PathVariable int id) {
         carRepository.deleteById(id);
 
     }
@@ -88,11 +90,11 @@ public class CarController {
     }
 
 
-    @ApiOperation(value = "Update Location Car by id, locationName ",response = Car.class,
+    @ApiOperation(value = "Update Location Car by id, locationName ", response = Car.class,
             responseContainer = "Car")
     @PutMapping("/car_update/{carId}/{locationName}")
-    public ResponseEntity<Car>updateCarLocation(@PathVariable Integer carId, @PathVariable String locationName){
-        return new ResponseEntity<Car>(carService.updateCarLocation(carId,locationName), HttpStatus.OK);
+    public ResponseEntity<Car> updateCarLocation(@PathVariable Integer carId, @PathVariable String locationName) {
+        return new ResponseEntity<Car>(carService.updateCarLocation(carId, locationName), HttpStatus.OK);
     }
 
     @ApiOperation(value = "Check car available ",
@@ -100,11 +102,16 @@ public class CarController {
             response = Car.class,
             responseContainer = "Object")
     @GetMapping("/car_available/{pickUpLocationId}/{dropOffLocationId}/{startDate}/{endDate}")
-    public List<Car> checkCarAvailable(@PathVariable Integer pickUpLocationId,
-                                       @PathVariable Integer dropOffLocationId,
-                                       @PathVariable String startDate, @PathVariable String endDate) throws ParseException {
+    public ResponseEntity<List<Car>> checkCarAvailable(@PathVariable Integer pickUpLocationId,
+                                                       @PathVariable Integer dropOffLocationId,
+                                                       @PathVariable String startDate, @PathVariable String endDate) throws ParseException {
 
+       List<Car> car = carService.checkCarAvailable(pickUpLocationId, dropOffLocationId, startDate, endDate);
 
-        return carService.checkCarAvailable(pickUpLocationId, dropOffLocationId,startDate,endDate);
+       if (car.isEmpty()){
+           return new ResponseEntity<List<Car>>(car, HttpStatus.NO_CONTENT);
+       }
+
+       return new ResponseEntity<List<Car>>(car, HttpStatus.OK);
     }
 }

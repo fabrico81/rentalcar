@@ -3,11 +3,16 @@ package com.rentalcar.server.model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * DAO Equipment Entity
+ *
  * @author faber
  */
 @ApiModel(description="Entity Equipment. Equipment available for the car. ")
