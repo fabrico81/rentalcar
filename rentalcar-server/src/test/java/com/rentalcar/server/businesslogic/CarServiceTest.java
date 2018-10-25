@@ -94,7 +94,7 @@ JPA 2 TEST
         Query qry = em.createQuery(cq);
         List<Car> cars1 = qry.getResultList();
         Join<Car, Rental> carRentalJoin = car.join(Car_.rental);
-        cq.select(carRentalJoin).where(cb.equal(carRentalJoin.get(Rental_.id), pickUpLocationId));
+        cq.select(carRentalJoin).where(cb.equal(carRentalJoin.get(Rental_.idLocation), pickUpLocationId));
         TypedQuery<Car> q = em.createQuery(cq);
 
         List<Car> cars = q.getResultList();

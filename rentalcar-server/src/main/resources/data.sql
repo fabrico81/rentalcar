@@ -1,6 +1,6 @@
 --USER
 insert into user  values(1, sysdate(), 'jTailor@tailor.com', 'James', 'Tailor');
-insert into user  values(1, sysdate(), 'jTailor@tailor.com', 'James', 'Tailor');
+insert into user  values(2, sysdate(), 'catSteven@stevens.com', 'Stevens', 'Cat');
 
 --CITY
 insert into city values (1,'Berlin');

@@ -11,6 +11,7 @@ import com.rentalcar.server.repository.LocationRepository;
 import com.rentalcar.server.repository.RentalRepository;
 import com.rentalcar.server.repository.UserRepository;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class RentalServiceTest {
     CarRepository carRepository;
     @Autowired
     LocationRepository locationRepository;
-
+    @Ignore
     @Test
     public void rentCar() throws ParseException {
         /*User user = new User();

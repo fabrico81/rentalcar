@@ -23,7 +23,7 @@ public class Location {
     private String name;
     private String address;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
 //    @JsonIgnore
     private City city;
 

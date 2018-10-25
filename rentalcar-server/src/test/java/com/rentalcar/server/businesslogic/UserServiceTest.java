@@ -2,6 +2,7 @@ package com.rentalcar.server.businesslogic;
 
 import com.rentalcar.server.repository.RentalRepository;
 import com.rentalcar.server.repository.UserRepository;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class UserServiceTest {
 
 
     @Test
+    @Ignore
     public void deleteUserServiceTest(){
 
         rentalRepository.findRentalByUserId(new Integer(1));
