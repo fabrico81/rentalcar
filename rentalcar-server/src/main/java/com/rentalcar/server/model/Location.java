@@ -4,13 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author faber
  */
 
-@ApiModel(description = "A city can have different location to pick-up and drop-off a car")
+@ApiModel(description = "Entity Location. A city can have different location to pick-up and drop-off a car")
 @Table(name = "location")
 @Entity
 public class Location {
@@ -21,21 +21,21 @@ public class Location {
     private String name;
     private String address;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
 //    @JsonIgnore
     private City city;
 
     @OneToMany(mappedBy = "location")
     @JsonIgnore
-    private List<Car> cars;
+    private Set<Car> cars;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "pickUpLocation")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pickUpLocation")
     @JsonIgnore
-    private Rental rentalPickUpLocation;
+    private Set<Rental> rentalPickUpLocation;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "dropOffLocation")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "dropOffLocation")
     @JsonIgnore
-    private Rental rentalDropOffLocation;
+    private Set<Rental> rentalDropOffLocation;
 
     public Location(){}
 
@@ -75,32 +75,31 @@ public class Location {
         this.city = city;
     }
 
-    public List<Car> getCar() {
-        return cars;
-    }
-
-    public void setCar(List<Car> cars) {
-        this.cars = cars;
-    }
-
     public String getName() { return name;}
 
     public void setName(String name) {this.name = name;}
 
+    public Set<Car> getCars() {
+        return cars;
+    }
 
-    public Rental getRentalPickUpLocation() {
+    public void setCars(Set<Car> cars) {
+        this.cars = cars;
+    }
+
+    public Set<Rental> getRentalPickUpLocation() {
         return rentalPickUpLocation;
     }
 
-    public void setRentalPickUpLocation(Rental rentalPickUpLocation) {
+    public void setRentalPickUpLocation(Set<Rental> rentalPickUpLocation) {
         this.rentalPickUpLocation = rentalPickUpLocation;
     }
 
-    public Rental getRentalDropOffLocation() {
+    public Set<Rental> getRentalDropOffLocation() {
         return rentalDropOffLocation;
     }
 
-    public void setRentalDropOffLocation(Rental rentalDropOffLocation) {
+    public void setRentalDropOffLocation(Set<Rental> rentalDropOffLocation) {
         this.rentalDropOffLocation = rentalDropOffLocation;
     }
 }

@@ -1,5 +1,6 @@
 package com.rentalcar.server.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 
@@ -10,11 +11,13 @@ import java.util.Set;
 /**
  * @author faber
  */
-@ApiModel(description="All details about the car. ")
+@ApiModel(description="Entity Car. ")
 @Entity
 @Table(name="car")
 public class Car {
+
     @Id
+    @GeneratedValue
     private Integer id;
     private String brand;
     private String model;
@@ -22,8 +25,20 @@ public class Car {
     private String color;
     private String licencePlate;
 
+    public Car(){
+        super();
+    }
+    @JsonCreator
+    public Car(Integer id, String brand, String model, Integer mileage, String color, String licencePlate) {
+        this.id = id;
+        this.brand = brand;
+        this.model = model;
+        this.mileage = mileage;
+        this.color = color;
+        this.licencePlate = licencePlate;
+    }
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     private Location location;
 
@@ -38,9 +53,9 @@ public class Car {
     private Set<Equipment> equipments = new HashSet<>();
 
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "car")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "car")
     @JsonIgnore
-    private Rental rental;
+    private Set<Rental> rental;
 
     public Integer getId() {
         return id;
@@ -106,11 +121,11 @@ public class Car {
         this.location = location;
     }
 
-    public Rental getRental() {
+    public Set<Rental> getRental() {
         return rental;
     }
 
-    public void setRental(Rental rental) {
+    public void setRental(Set<Rental> rental) {
         this.rental = rental;
     }
 }

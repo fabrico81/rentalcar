@@ -1,4 +1,4 @@
-package com.rentalcar.server.configuration;
+package com.rentalcar.server.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

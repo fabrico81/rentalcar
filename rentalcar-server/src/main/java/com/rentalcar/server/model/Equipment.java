@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * @author faber
  */
-@ApiModel(description="Equipment about the car. ")
+@ApiModel(description="Entity Equipment. Equipment available for the car. ")
 @Entity
 public class Equipment {
 

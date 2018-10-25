@@ -14,10 +14,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author faber
  */
 
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class LocationRepositoryTest {
+
+    // @TODO  Implement CRUD Test
 
     @Autowired
     LocationRepository locationRepository;

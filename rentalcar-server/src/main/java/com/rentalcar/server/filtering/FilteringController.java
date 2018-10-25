@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class FilteringController {
+
+    //@TODO Implement filters on the fields you want to return
 /*
     SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.
             filterOutAllExcept("Field1", "field2");

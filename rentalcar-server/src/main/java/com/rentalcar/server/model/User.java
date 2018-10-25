@@ -16,7 +16,7 @@ import java.util.List;
  * @author faber
  */
 
-@ApiModel(description="All details about the user. ")
+@ApiModel(description="Entity User. All details about the user. ")
 @Entity
 @Table(name = "user")
 public class User {

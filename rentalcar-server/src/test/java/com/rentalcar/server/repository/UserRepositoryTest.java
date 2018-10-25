@@ -80,6 +80,5 @@ public class UserRepositoryTest {
     private void read(){
         List<User> users = userRepository.findAll();
         Assert.assertNotNull(users);
-
     }
 }

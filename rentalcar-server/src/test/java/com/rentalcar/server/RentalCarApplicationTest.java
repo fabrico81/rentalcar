@@ -8,13 +8,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 /**
  * @author faber
  */
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RestfulWebServicesApplicationTests {
-
+public class RentalCarApplicationTest {
     @Test
-    public void contextLoads() {
+    public void contextLoads() throws Exception {
     }
 
+
 }
+
+

@@ -10,7 +10,7 @@ import javax.persistence.Id;
  * @author faber
  */
 
-@ApiModel(description="Category car (Van, City-Car, Station-wagon etc.).")
+@ApiModel(description="Entity Category, type of car (Van, City-Car, Station-wagon etc.).")
 @Entity
 public class Category {
 

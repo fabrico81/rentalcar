@@ -1,4 +1,4 @@
-package com.rentalcar.server.service;
+package com.rentalcar.server.businesslogic;
 
 import com.rentalcar.server.repository.RentalRepository;
 import com.rentalcar.server.repository.UserRepository;

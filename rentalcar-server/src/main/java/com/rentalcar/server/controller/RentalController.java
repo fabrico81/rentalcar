@@ -3,7 +3,7 @@ package com.rentalcar.server.controller;
 import com.rentalcar.server.exception.RentalNotFoundException;
 import com.rentalcar.server.model.Rental;
 import com.rentalcar.server.repository.RentalRepository;
-import com.rentalcar.server.service.IRentalService;
+import com.rentalcar.server.businesslogic.service.RentalService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
@@ -28,22 +28,28 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 @RestController
 public class RentalController {
 
+    // @TODO implement RentalControllerTest
+
     @Autowired
     private RentalRepository rentalRepository;
     @Autowired
-    private IRentalService rentalService;
+    private RentalService rentalService;
 
 
-    @GetMapping(path = "/rentals")
+
     @ApiOperation(value = "Finds All rental ",
             notes = "",
             response = Rental.class,
             responseContainer = "List")
+    @GetMapping(path = "/rentals")
     public List<Rental> getRentals(){
 
         return rentalRepository.findAll();
     }
-
+    @ApiOperation(value = "Finds Rental by ID ",
+            notes = "",
+            response = Rental.class,
+            responseContainer = "Object")
     @GetMapping(path = "/rental/{id}")
     public Resource<Rental> getRentalById(@PathVariable Integer id){
 
@@ -57,7 +63,10 @@ public class RentalController {
         resource.add(linkTo.withRel("all-rentals"));
         return resource;
     }
-
+    @ApiOperation(value = "Add Rental ",
+            notes = "",
+            response = Rental.class,
+            responseContainer = "Object")
     @PostMapping("/rental")
     public ResponseEntity<Object> addRental(@Valid @RequestBody Rental rental){
 
@@ -69,6 +78,7 @@ public class RentalController {
         return ResponseEntity.created(location).build();
     }
 
+    @ApiOperation(value = "Delete Rental ",response = Rental.class, responseContainer = "Object")
     @DeleteMapping("/rental/{id}")
     public void deleteRental(@PathVariable int id){
         rentalRepository.deleteById(id);

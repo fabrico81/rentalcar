@@ -30,22 +30,21 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @ApiOperation(value = "Finds All User ", response = User.class, responseContainer = "List")
     @GetMapping(path = "/users")
-    @ApiOperation(value = "Finds All User ",
-            notes = "",
-            response = User.class,
-            responseContainer = "List")
     public List<User> getUsers()
     {
+
         return userRepository.findAll();
     }
 
+    @ApiOperation(value = "Find User by id ", response = User.class, responseContainer = "Object and linked object")
     @GetMapping(path = "/user/{id}")
     public Resource<User> getUserById(@PathVariable Integer id){
 
         Optional<User> user = userRepository.findById(id);
         if(!user.isPresent())
-            throw new UserNotFoundException("id-" +id);
+            throw new UserNotFoundException("User id-" +id);
 
         Resource<User> resource = new Resource<User>(user.get());
         ControllerLinkBuilder linkTo =
@@ -54,6 +53,7 @@ public class UserController {
         return resource;
     }
 
+    @ApiOperation(value = "Add User ", response = User.class, responseContainer = "Object")
     @PostMapping("/users")
     public ResponseEntity<Object> addUser(@Valid @RequestBody User user){
 
@@ -64,10 +64,10 @@ public class UserController {
                 .buildAndExpand(savedUser.getId()).toUri();
         return ResponseEntity.created(location).build();
     }
-
+    @ApiOperation(value = "Delete User")
     @DeleteMapping("/users/{id}")
     public void deleteUser(@PathVariable int id){
-         userRepository.deleteById(id);
+        userRepository.deleteById(id);
     }
 
 

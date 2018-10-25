@@ -1,11 +1,11 @@
-package com.rentalcar.server.service;
+package com.rentalcar.server.businesslogic.impl;
 
+import com.rentalcar.server.businesslogic.service.RentalService;
 import com.rentalcar.server.exception.CarNotFoundException;
 import com.rentalcar.server.exception.LocationNotFoundException;
 import com.rentalcar.server.exception.UserNotFoundException;
 import com.rentalcar.server.model.Car;
 import com.rentalcar.server.model.Location;
-import com.rentalcar.server.model.Rental;
 import com.rentalcar.server.model.User;
 import com.rentalcar.server.repository.CarRepository;
 import com.rentalcar.server.repository.LocationRepository;
@@ -22,7 +22,7 @@ import java.util.Optional;
  * @author faber
  */
 @Component
-public class RentalService implements IRentalService{
+public class Rental implements RentalService {
 
     @Autowired
     RentalRepository rentalRepository;
@@ -44,10 +44,10 @@ public class RentalService implements IRentalService{
      */
 
     @Override
-    public Rental rentCar(Integer userId, Integer carId, Integer pickUpLocationId, Integer dropOffLocationId) throws ParseException {
+    public com.rentalcar.server.model.Rental rentCar(Integer userId, Integer carId, Integer pickUpLocationId, Integer dropOffLocationId) throws ParseException {
 
-        Optional<User> user = userRepository.findById(1);
-        Optional<Car> car = carRepository.findById(1);
+        Optional<User> user = userRepository.findById(userId);
+        Optional<Car> car = carRepository.findById(carId);
         Optional<Location> pickUpLocation = locationRepository.findById(pickUpLocationId);
         Optional<Location> dropOffLocation = locationRepository.findById(dropOffLocationId);
 
@@ -66,7 +66,7 @@ public class RentalService implements IRentalService{
             throw new LocationNotFoundException("Car not available for this location");
 
 
-        Rental rental = new Rental();
+        com.rentalcar.server.model.Rental rental = new com.rentalcar.server.model.Rental();
 //        rental.setId(400);
         rental.setCar(car.get());
         rental.setPickUpLocation(pickUpLocation.get());

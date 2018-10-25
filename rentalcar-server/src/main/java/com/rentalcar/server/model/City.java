@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author faber
@@ -23,7 +24,7 @@ public class City {
     private String name;
 
     @OneToMany(mappedBy = "city")
-    private List<Location> location;
+    private Set<Location> location;
 
     public City(){}
 
@@ -47,11 +48,11 @@ public class City {
         this.id = id;
     }
 
-    public List<Location> getLocation() {
+    public Set<Location> getLocation() {
         return location;
     }
 
-    public void setLocation(List<Location> location) {
+    public void setLocation(Set<Location> location) {
         this.location = location;
     }
 }

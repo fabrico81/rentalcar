@@ -1,4 +1,4 @@
-package com.rentalcar.server.service;
+package com.rentalcar.server.businesslogic;
 
 import com.rentalcar.server.exception.CarNotFoundException;
 import com.rentalcar.server.exception.UserNotFoundException;

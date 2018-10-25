@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * @author faber
  */
-@ApiModel(description = "Information on car rental")
+@ApiModel(description = "Entity Rental. Information on rented cars")
 @Table(name = "rental")
 @Entity
 public class Rental {
@@ -22,20 +22,18 @@ public class Rental {
     private Date startDate;
     private Date endDate;
 
-   @OneToOne(fetch = FetchType.LAZY, optional=false)
-
+   @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn(name = "car_id")
 //   @JsonIgnore
     private Car car;
 
 
-    @OneToOne(fetch = FetchType.LAZY,optional=false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pickUpLocation_id")
-//    @JsonIgnore
     private Location pickUpLocation;
 
-    @OneToOne(fetch = FetchType.LAZY, optional=false)
-    @JoinColumn(name = "dropOffLocation_id")//    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dropOffLocation_id")
     private Location dropOffLocation;
 
     @ManyToOne(fetch = FetchType.LAZY)
