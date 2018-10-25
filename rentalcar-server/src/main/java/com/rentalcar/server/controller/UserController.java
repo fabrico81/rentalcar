@@ -39,7 +39,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "Find User by id ", response = User.class, responseContainer = "Object and linked object")
-    @GetMapping(path = "/user/{id}")
+    @GetMapping(path = "/users/{id}")
     public Resource<User> getUserById(@PathVariable Integer id){
 
         Optional<User> user = userRepository.findById(id);

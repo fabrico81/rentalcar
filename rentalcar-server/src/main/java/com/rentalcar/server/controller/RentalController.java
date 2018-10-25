@@ -49,7 +49,7 @@ public class RentalController {
             notes = "",
             response = Rental.class,
             responseContainer = "Object")
-    @GetMapping(path = "/rental/{id}")
+    @GetMapping(path = "/rentals/{id}")
     public Resource<Rental> getRentalById(@PathVariable Integer id){
 
         Optional<Rental> rental = rentalRepository.findById(id);
@@ -66,7 +66,7 @@ public class RentalController {
             notes = "",
             response = Rental.class,
             responseContainer = "Object")
-    @PostMapping("/rental")
+    @PostMapping("/rentals")
     public ResponseEntity<Object> addRental(@Valid @RequestBody Rental rental){
 
         Rental savedRental = rentalRepository.save(rental);
@@ -78,13 +78,13 @@ public class RentalController {
     }
 
     @ApiOperation(value = "Delete Rental ",response = Rental.class, responseContainer = "Object")
-    @DeleteMapping("/rental/{id}")
+    @DeleteMapping("/rentals/{id}")
     public void deleteRental(@PathVariable int id)
     {
         rentalRepository.deleteById(id);
     }
 
-    @PostMapping("/rent_car/{userId}/{carId}/{pickUpLocationId}/{dropOffLocationId}/{startDate}/{endDate}")
+    @PostMapping("/rents_car/{userId}/{carId}/{pickUpLocationId}/{dropOffLocationId}/{startDate}/{endDate}")
     public ResponseEntity<Rental> rentCar(@PathVariable Integer userId, @PathVariable Integer carId,
                                           @PathVariable Integer pickUpLocationId, @PathVariable Integer dropOffLocationId,
                                           @PathVariable String startDate, @PathVariable String endDate) throws ParseException {

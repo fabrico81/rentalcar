@@ -63,7 +63,7 @@ public class CarController {
         return resource;
     }
 
-    @PostMapping("/car")
+    @PostMapping("/cars")
     @ApiOperation(value = "Add car ", response = Car.class, responseContainer = "Car")
     public ResponseEntity<Car> addCar(@Valid @RequestBody Car car) {
 
@@ -75,14 +75,14 @@ public class CarController {
         return ResponseEntity.created(location).build();
     }
 
-    @DeleteMapping("/car/{id}")
+    @DeleteMapping("/cars/{id}")
     @ApiOperation(value = "Delete car by id ", response = Car.class)
     public void deleteCar(@PathVariable int id) {
         carRepository.deleteById(id);
 
     }
 
-    @PutMapping("/car")
+    @PutMapping("/cars")
     @ApiOperation(value = "Update car ", response = Car.class, responseContainer = "Car")
     public ResponseEntity<Car> updateCar(@RequestBody Car car) {
         carRepository.save(car);
